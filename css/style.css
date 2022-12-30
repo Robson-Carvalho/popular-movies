@@ -1,0 +1,13 @@
+:root {
+	--bg-color: #17162e;
+	--white-color: #fff;
+	--gray-search-color: #8a8a8a;
+	--gray-text-color: #acacac;
+}
+
+body {
+	width: 100%;
+	height: 100vh;
+	font-family: 'Kumbh Sans', sans-serif;
+	font-style: normal;
+}
