@@ -10,4 +10,75 @@ body {
 	height: 100vh;
 	font-family: 'Kumbh Sans', sans-serif;
 	font-style: normal;
+	background: var(--bg-color);
+}
+
+header {
+	margin: 3.875rem 0 3rem 0;
+}
+
+header h1 {
+	font-weight: 600;
+	font-size: 2.25rem;
+	line-height: 2.8125rem;
+	text-align: center;
+	color: var(--white-color);
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 1rem;
+}
+
+main .search {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.875rem;
+}
+
+main .search .box {
+	width: 39.625rem;
+	height: 4.625rem;
+
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: .5rem;
+	padding: 1.625rem 1.5rem;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 1rem;
+}
+
+main .search .box input {
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 22px;
+
+	background-color: transparent;
+	color: var(--white-color);
+	outline: none;
+	border: none;
+	flex-grow: 1;
+}
+
+main .search .box input::placeholder {
+	color: var(--gray-search-color);
+}
+
+main .search .box .search-icon {
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+main .search .box .search-icon img {
+	width: 1.146875rem;
+	height: 1.209375rem;
 }
