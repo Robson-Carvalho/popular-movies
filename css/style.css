@@ -39,7 +39,7 @@ main .search {
 	gap: 1.875rem;
 }
 
-main .search .box {
+main .search .wrapper {
 	width: 39.625rem;
 	height: 4.625rem;
 
@@ -53,7 +53,7 @@ main .search .box {
 	gap: 1rem;
 }
 
-main .search .box input {
+main .search .wrapper input {
 	font-weight: 500;
 	font-size: 18px;
 	line-height: 22px;
@@ -65,11 +65,11 @@ main .search .box input {
 	flex-grow: 1;
 }
 
-main .search .box input::placeholder {
+main .search .wrapper input::placeholder {
 	color: var(--gray-search-color);
 }
 
-main .search .box .search-icon {
+main .search .wrapper .icon {
 	border: none;
 	background: transparent;
 	cursor: pointer;
@@ -78,7 +78,25 @@ main .search .box .search-icon {
 	justify-content: center;
 }
 
-main .search .box .search-icon img {
+main .search .wrapper .icon img {
 	width: 1.146875rem;
 	height: 1.209375rem;
+}
+
+main .search .favorite {
+	display: flex;
+	flex-direction: row;
+	gap: .6875rem;
+}
+
+main .search .favorite input[type="checkbox"] {
+	cursor: pointer;
+}
+
+main .search .favorite label {
+	font-weight: 600;
+	font-size: 1.125rem;
+	line-height: 1.375rem;
+	color: var(--white-color);
+	cursor: pointer;
 }
