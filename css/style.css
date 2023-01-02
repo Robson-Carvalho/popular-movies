@@ -1,6 +1,6 @@
 :root {
 	--bg-color: #17162e;
-	--blue-color: #1D1C3B;
+	--card-color: #1D1C3B;
 	--white-color: #fff;
 	--gray-search-color: #8a8a8a;
 	--gray-text-color: #acacac;
@@ -33,57 +33,60 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 0 1.5rem;
+	padding: 0 1rem;
 }
 
 main .search {
 	width: 100%;
 	display: flex;
-	align-items: center;
 	flex-direction: column;
+	align-items: center;
 	gap: 1.875rem;
 }
 
-main .search .input {
-	width: 21.25rem;
-	height: 3.75rem;
-	padding: 0 1rem;
+
+main .search .box-input {
+	width: 39.625rem;
+	height: 4.625rem;
+	background: rgba(255, 255, 255, .2);
+	border-radius: 0.5rem;
+	padding: 1.625rem 1.5rem;
 
 	display: flex;
 	flex-direction: row;
-	gap: 1.875rem;
-
-	background: rgba(255, 255, 255, 0.2);
-	border-radius: 0.5rem;
+	align-items: center;
 }
 
-main .search .input input[type="text"] {
+main .search .box-input input {
+	width: 18.3125rem;
+	height: 1.375rem;
+
 	outline: none;
-	border: none;
-	flex-grow: 1;
 	background: transparent;
+	border: none;
+	color: var(--white-color);
 
 	font-weight: 500;
-	font-size: 0.875rem;
+	font-size: 1.125rem;
 	line-height: 1.375rem;
-
-	color: var(--white-color);
+	flex-grow: 1;
 }
 
-main .search .input input[type="text"]::placeholder {
-	font-weight: 500;
-	font-size: 0.875rem;
-	line-height: 1.375rem;
+main .search .box-input input::placeholder {
 	color: var(--gray-search-color);
 }
 
-main .search .input .btn {
-	background: transparent;
+main .search .box-input .btn {
+	width: auto;
+	height: auto;
 	border: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	background: transparent;
 	cursor: pointer;
+}
+
+main .search .box-input .btn .icon {
+	width: 1.1469rem;
+	height: 1.2094rem;
 }
 
 main .search .select-favorite {
@@ -95,7 +98,107 @@ main .search .select-favorite {
 
 main .search .select-favorite label {
 	font-weight: 600;
-	font-size: 0.875rem;
+	font-size: 1.125rem;
 	line-height: 1.375rem;
 	color: var(--white-color);
+}
+
+main .movie {
+	width: 100%;
+	padding: 4rem 0;
+}
+
+main .movie .container-movie {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 3rem;
+	padding: 0 1rem;
+}
+
+main .movie .container-movie .card-movie {
+	width: 76.5rem;
+	height: 12.5625rem;
+	padding: 1.5rem 2.875rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 7.8125rem;
+
+	background: var(--card-color);
+	box-shadow: 2.0524rem 1.5343rem 4.9375rem rgba(0, 0, 0, 0.15), 1.4928rem 1.1159rem 3.328rem rgba(0, 0, 0, 0.121406), 1.039rem 0.7767rem 2.1524rem rgba(0, 0, 0, 0.10125), 0.6815rem 0.5094rem 1.3356rem rgba(0, 0, 0, 0.0867188), 0.4105rem 0.3069rem 0.8023rem rgba(0, 0, 0, 0.075), 0.2165rem 0.1618rem 0.4774rem rgba(0, 0, 0, 0.0632813), 0.0898rem 0.0671rem 0.2854rem rgba(0, 0, 0, 0.04875), 0.0208rem 0.0156rem 0.1514rem rgba(0, 0, 0, 0.0285938);
+	border-radius: 0.5rem;
+}
+
+main .movie .container-movie .card-movie .info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 4rem;
+}
+
+main .movie .container-movie .card-movie .info .movie-cover {
+	width: 8.6875rem;
+	height: 8.6875rem;
+	border-radius: 4.3438rem;
+
+	filter: drop-shadow(1.25rem 1.25rem 1.875rem rgba(0, 0, 0, 0.3));
+	border-radius: 50rem;
+}
+
+main .movie .container-movie .card-movie .info .description {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5625rem;
+}
+
+main .movie .container-movie .card-movie .info .description {
+	font-weight: 500;
+	font-size: 1.125rem;
+	line-height: 1.375rem;
+	color: var(--white-color);
+}
+
+main .movie .container-movie .card-movie .info .description .category {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 2.8125rem;
+}
+
+main .movie .container-movie .card-movie .info .description .category .stars {
+	display: flex;
+	flex-direction: row;
+	gap: 0.75rem;
+
+	font-size: 1.125rem;
+	line-height: 1.375rem;
+
+	color: var(--white-color);
+}
+
+main .movie .container-movie .card-movie .info .description .category .favorite {
+	display: flex;
+	flex-direction: row;
+	gap: 0.75rem;
+}
+
+main .movie .container-movie .card-movie .info .description .category .favorite button {
+	font-size: 1.125rem;
+	font-weight: 400;
+	line-height: 1.375rem;
+	color: var(--white-color);
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+main .movie .container-movie .card-movie .sinopse {
+	font-weight: 500;
+	font-size: 1.125rem;
+	line-height: 2rem;
+	color: var(--gray-text-color);
 }
