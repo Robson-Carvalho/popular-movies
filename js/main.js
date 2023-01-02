@@ -1,8 +1,24 @@
+async function getMovies() {
+	try {
+		const url = "https://api.themoviedb.org/3/movie/popular?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-br&page=1";
+		const movies = await fetch(url)
+			.then(response => response.json())
+			.then(data => data.results)
+			.then(movies => movies);
+		addMovies(movies)
+
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+getMovies()
+
 const movieContainer = document.querySelector("#movie-container");
+
 
 function renderMovie(movie) {
 	const movieData = movie;
-
 	const movieCard = document.createElement("div");
 	movieCard.classList.add("movie-card")
 	const info = document.createElement("div");
@@ -10,6 +26,7 @@ function renderMovie(movie) {
 	const movieCover = document.createElement("img");
 	movieCover.setAttribute("src", movieData.image);
 	movieCover.classList.add("movie-cover")
+	movieCover.setAttribute("src", movieData.backdrop_path)
 	const description = document.createElement("div");
 	description.classList.add("description");
 	const title = document.createElement("p");
@@ -31,7 +48,7 @@ function renderMovie(movie) {
 	buttonFavorite.innerText = "Favoritar";
 	const sinopse = document.createElement("p");
 	sinopse.classList.add("sinopse")
-	sinopse.innerText = movieData.description;
+	sinopse.innerText = movieData.overview ? movieData.overview : "Sem descrição!";
 
 	stars.appendChild(iconStars);
 	stars.appendChild(rating);
@@ -76,4 +93,6 @@ const movies = [
 	},
 ];
 
-movies.forEach(movie => renderMovie(movie));
+function addMovies(movies) {
+	movies.forEach(movie => renderMovie(movie));
+}

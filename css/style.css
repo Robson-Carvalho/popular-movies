@@ -119,7 +119,7 @@ main .movie .movie-container {
 
 main .movie .movie-container .movie-card {
 	width: 76.5rem;
-	height: 12.5625rem;
+	height: auto;
 	padding: 1.5rem 2.875rem;
 	display: flex;
 	flex-direction: row;
@@ -144,6 +144,8 @@ main .movie .movie-container .movie-card .info .movie-cover {
 	width: 8.6875rem;
 	height: 8.6875rem;
 	border-radius: 4.3438rem;
+	object-fit: cover;
+
 
 	filter: drop-shadow(1.25rem 1.25rem 1.875rem rgba(0, 0, 0, 0.3));
 }
