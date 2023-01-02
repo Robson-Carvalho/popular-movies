@@ -1,5 +1,6 @@
 :root {
 	--bg-color: #17162e;
+	--blue-color: #1D1C3B;
 	--white-color: #fff;
 	--gray-search-color: #8a8a8a;
 	--gray-text-color: #acacac;
@@ -8,20 +9,23 @@
 body {
 	width: 100%;
 	height: 100vh;
+	background: var(--bg-color);
 	font-family: 'Kumbh Sans', sans-serif;
 	font-style: normal;
-	background: var(--bg-color);
 }
 
 header {
-	margin: 3.875rem 0 3rem 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 3.875rem 0 3rem 0;
 }
 
 header h1 {
 	font-weight: 600;
 	font-size: 2.25rem;
 	line-height: 2.8125rem;
-	text-align: center;
 	color: var(--white-color);
 }
 
@@ -29,74 +33,69 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 0 1rem;
+	padding: 0 1.5rem;
 }
 
 main .search {
+	width: 100%;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
+	flex-direction: column;
 	gap: 1.875rem;
 }
 
-main .search .wrapper {
-	width: 39.625rem;
-	height: 4.625rem;
-
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: .5rem;
-	padding: 1.625rem 1.5rem;
+main .search .input {
+	width: 21.25rem;
+	height: 3.75rem;
+	padding: 0 1rem;
 
 	display: flex;
 	flex-direction: row;
-	align-items: center;
-	gap: 1rem;
+	gap: 1.875rem;
+
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 0.5rem;
 }
 
-main .search .wrapper input {
-	font-weight: 500;
-	font-size: 18px;
-	line-height: 22px;
-
-	background-color: transparent;
-	color: var(--white-color);
+main .search .input input[type="text"] {
 	outline: none;
 	border: none;
 	flex-grow: 1;
+	background: transparent;
+
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1.375rem;
+
+	color: var(--white-color);
 }
 
-main .search .wrapper input::placeholder {
+main .search .input input[type="text"]::placeholder {
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1.375rem;
 	color: var(--gray-search-color);
 }
 
-main .search .wrapper .icon {
-	border: none;
+main .search .input .btn {
 	background: transparent;
-	cursor: pointer;
+	border: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 }
 
-main .search .wrapper .icon img {
-	width: 1.146875rem;
-	height: 1.209375rem;
-}
-
-main .search .favorite {
+main .search .select-favorite {
 	display: flex;
 	flex-direction: row;
-	gap: .6875rem;
+	align-items: center;
+	gap: 0.875rem;
 }
 
-main .search .favorite input[type="checkbox"] {
-	cursor: pointer;
-}
-
-main .search .favorite label {
+main .search .select-favorite label {
 	font-weight: 600;
-	font-size: 1.125rem;
+	font-size: 0.875rem;
 	line-height: 1.375rem;
 	color: var(--white-color);
-	cursor: pointer;
 }

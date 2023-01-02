@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./css/reset.css">
 	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/responsive.css">
 	<title>Popular Movies</title>
 </head>
 
@@ -16,52 +17,20 @@
 	<header>
 		<h1>Filmes Populares</h1>
 	</header>
-
 	<main>
 		<section class="search">
-			<div class="wrapper">
+			<div class="input">
 				<input type="text" placeholder="Digite algum filme para pesquisar...">
-				<button class="icon">
-					<img src="./assets/search-icon.svg" alt="Icone de pesquisa">
+				<button class="btn">
+					<img class="icon" src="./assets/search-icon.svg" alt="Ícone de pesquisa">
 				</button>
 			</div>
-
-			<div class="favorite">
+			<div class="select-favorite">
 				<input type="checkbox" id="check">
 				<label for="check">Mostrar meus filmes favoritos apenas</label>
 			</div>
 		</section>
-
-		<section class="movies">
-			<div class="container-movie">
-
-				<div class="card-movie">
-					<div class="info">
-						<img class="movie cover" src="./assets/image-batman.svg" alt="capa do filme">
-						<div>
-							<p class="title">Batman(2022)</p>
-							<div class="stars-heart">
-								<div class="stars">
-									<img src="./assets/star.svg" alt="estrela">
-									<p>9.2</p>
-								</div>
-								<div class="heart">
-									<img src="./assets/heart-empty.svg" alt="coração vazio">
-									<p>Favoritar</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde eligendi quos ipsam
-						officia ad facilis illo
-						repudiandae sint neque nemo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nobis libero
-						officiis quibusdam repellat eveniet illo iste molestias illum quis.</p>
-				</div>
-
-			</div>
-		</section>
 	</main>
-
 	<script src="./js/main.js"></script>
 </body>
 
