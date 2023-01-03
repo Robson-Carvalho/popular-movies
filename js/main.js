@@ -2,21 +2,7 @@ const movieContainer = document.querySelector("#movie-container");
 
 getMovies();
 
-async function getMovies() {
-	try {
-		const url = "https://api.themoviedb.org/3/movie/popular?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-br&page=2";
-		const movies = await fetch(url)
-			.then(response => response.json())
-			.then(data => data.results).then(body => body);
-
-		addMovies(movies);
-	} catch (error) {
-		console.log(error);
-	}
-}
-
 function renderMovies(movie) {
-	console.log(movie)
 	const movieData = movie;
 	const movieCard = document.createElement("div");
 	movieCard.classList.add("movie-card")
@@ -66,5 +52,43 @@ function renderMovies(movie) {
 }
 
 function addMovies(movies) {
+	movieContainer.innerHTML = "";
 	movies.forEach(movie => renderMovies(movie));
+}
+
+async function getMovies() {
+	try {
+		const url = "https://api.themoviedb.org/3/movie/popular?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-br&page=1";
+		const movies = await fetch(url)
+			.then(response => response.json())
+			.then(data => data.results).then(body => body);
+
+		addMovies(movies);
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+function handleSearchMovieByName() {
+	let name = document.querySelector("#movie-name");
+	if (name !== "") {
+		getMovieByName(name.value);
+		return name.value = "";
+	}
+}
+
+window.addEventListener("keydown", (event) => {
+	if (event.key === "Enter") {
+		handleSearchMovieByName();
+	}
+});
+
+async function getMovieByName(movieName) {
+	try {
+		const url = `https://api.themoviedb.org/3/search/movie?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-BR&query=${movieName}&page=1&include_adult=false`;
+		const movies = await fetch(url).then(response => response.json()).then(body => body.results)
+		addMovies(movies)
+	} catch (error) {
+		console.log(error);
+	}
 }

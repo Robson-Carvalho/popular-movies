@@ -141,7 +141,7 @@ main .movie .movie-container .movie-card .info {
 }
 
 main .movie .movie-container .movie-card .info .movie-cover {
-	width: 8.6875rem;
+	min-width: 8.6875rem;
 	height: 8.6875rem;
 	border-radius: 4.3438rem;
 	object-fit: cover;
