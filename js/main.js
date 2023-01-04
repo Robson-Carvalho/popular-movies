@@ -1,6 +1,5 @@
 const movieContainer = document.querySelector("#movie-container");
 let search = document.querySelector("#movie-name");
-let urlCurrent = window.location.href;
 
 const isFavorite = (id) => {
 	let IDs = localStorage.getItem("idMovie");
@@ -83,10 +82,9 @@ const addMoviesInContainer = (movies) => {
 	movies.forEach(movie => renderMovies(movie));
 }
 
-const getMovies = async (urlCurrent) => {
+const getMovies = async () => {
 	try {
-		let url = "https://api.themoviedb.org/3/movie/popular?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-br&page=1";
-		url = urlCurrent === undefined ? url : window.location.href;
+		const url = "https://api.themoviedb.org/3/movie/popular?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-br&page=1";
 		const movies = await fetch(url);
 		const response = await movies.json();
 		const data = await response.results;
@@ -122,10 +120,10 @@ const addMovieInLocalStorage = (id, movie) => {
 	if (IDs !== null) {
 		const allIDs = JSON.parse(IDs);
 		localStorage.setItem("idMovie", JSON.stringify([...allIDs, id]));
-		return getMovies(urlCurrent);
+		return getMovies();
 	}
 	localStorage.setItem("idMovie", JSON.stringify([id]));
-	return getMovies(urlCurrent);
+	return getMovies();
 }
 
 const movieExistsInLocalStorage = (id) => {
@@ -144,7 +142,7 @@ const removeMovieFromLocalStorage = (id) => {
 	let newIdMovies = idMovies.filter(idMovie => idMovie != id)
 
 	localStorage.setItem("idMovie", JSON.stringify([...newIdMovies]));
-	return getMovies(urlCurrent);
+	return getMovies();
 }
 
 const handleToggleFavoriteMovie = async (idMovie) => {
