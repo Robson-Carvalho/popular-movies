@@ -20,7 +20,7 @@
 		<section class="search">
 			<div class="box-input">
 				<input id="movie-name" type="text" placeholder="Digite algum filme para pesquisar...">
-				<button onclick="handleSearchMovieByName()" class="btn">
+				<button onclick="handleMovieSearch()" class="btn">
 					<img class="icon" src="./assets/search-icon.svg" alt="Ícone de pesquisa">
 				</button>
 			</div>
@@ -32,8 +32,8 @@
 
 		<section class="movie">
 			<div id="movie-container" class="movie-container">
-
-				<!-- <div class="movie-card">
+				<!--
+				<div class="movie-card">
 					<div class="info">
 						<img class="movie-cover" src="./assets/image-batman.svg" alt="">
 						<div class="description">
@@ -44,8 +44,10 @@
 									<p>9.4</p>
 								</div>
 								<div class="favorite">
-									<img src="./assets/heart-empty.svg" alt="">
-									<button>Favoritar</button>
+									<button class="btn-favorite">
+										<img src="./assets/heart-empty.svg" alt="">
+										<p>Favoritar</p>
+									</button>
 								</div>
 							</div>
 						</div>
