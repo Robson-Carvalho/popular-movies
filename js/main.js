@@ -1,6 +1,8 @@
-const movieContainer = document.querySelector("#movie-container");
+const moviesContainer = document.querySelector("#movie-container");
+const switchMovieBetweenFavoriteAndDefault = document.querySelector("#switchMovieBetweenFavoriteAndDefault");
+let isInputCheck = false;
 let search = document.querySelector("#movie-name");
-let currentResearch = search.value || "default";
+let currentResearch = "default";
 
 const isFavorite = (id) => {
 	let IDs = localStorage.getItem("idMovie");
@@ -40,7 +42,7 @@ const renderMovies = (movie) => {
 	iconStars.setAttribute("src", "./assets/star.svg");
 
 	const rating = document.createElement("p");
-	rating.innerText = movie.vote_average;
+	rating.innerText = Number(movie.vote_average).toFixed(1);
 
 	const favorite = document.createElement("div");
 	favorite.classList.add("favorite");
@@ -73,10 +75,10 @@ const renderMovies = (movie) => {
 	movieCard.appendChild(info);
 	movieCard.appendChild(sinopse)
 
-	movieContainer.appendChild(movieCard);
+	moviesContainer.appendChild(movieCard);
 }
 
-const clearMovieContainer = () => movieContainer.innerHTML = "";
+const clearMovieContainer = () => moviesContainer.innerHTML = "";
 
 const addMoviesInContainer = (movies) => {
 	clearMovieContainer();
@@ -91,6 +93,7 @@ const getMovies = async (search) => {
 			const response = await movies.json();
 			const data = await response.results;
 			currentResearch = "default";
+
 			return addMoviesInContainer(data);
 		} catch (error) {
 			console.log(error);
@@ -129,7 +132,7 @@ window.addEventListener("keydown", (event) => {
 });
 
 
-const addMovieInLocalStorage = (id, movie) => {
+const addMovieInLocalStorage = (id) => {
 	const IDs = localStorage.getItem("idMovie");
 	if (IDs !== null) {
 		const allIDs = JSON.parse(IDs);
@@ -137,6 +140,20 @@ const addMovieInLocalStorage = (id, movie) => {
 		return getMovies(currentResearch);
 	}
 	localStorage.setItem("idMovie", JSON.stringify([id]));
+	return getMovies(currentResearch);
+}
+
+const removeMovieFromLocalStorage = (id) => {
+	let idMovies = localStorage.getItem("idMovie");
+	idMovies = JSON.parse(idMovies);
+
+	let newIdMovies = idMovies.filter(idMovie => idMovie != id)
+
+	localStorage.setItem("idMovie", JSON.stringify([...newIdMovies]));
+
+	if (isInputCheck) {
+		return checkingFavoriteMovies();
+	}
 	return getMovies(currentResearch);
 }
 
@@ -149,28 +166,47 @@ const movieExistsInLocalStorage = (id) => {
 	return false
 }
 
-const removeMovieFromLocalStorage = (id) => {
-	let idMovies = localStorage.getItem("idMovie");
-	idMovies = JSON.parse(idMovies);
-
-	let newIdMovies = idMovies.filter(idMovie => idMovie != id)
-
-	localStorage.setItem("idMovie", JSON.stringify([...newIdMovies]));
-	return getMovies(currentResearch);
-}
-
-const handleToggleFavoriteMovie = async (idMovie) => {
-	if (!movieExistsInLocalStorage(idMovie)) {
-		try {
-			const url = (`https://api.themoviedb.org/3/movie/${idMovie}?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-BR`);
-			const movies = await fetch(url)
-			const data = await movies.json()
-
-			return addMovieInLocalStorage(idMovie, data);
-		} catch (error) { console.log(error) }
+const handleToggleFavoriteMovie = async (id) => {
+	if (!movieExistsInLocalStorage(id)) {
+		return addMovieInLocalStorage(id);
 	}
-	removeMovieFromLocalStorage(idMovie)
+	removeMovieFromLocalStorage(id)
 }
+
+const getMoviebyID = async (id) => {
+	try {
+		const url = (`https://api.themoviedb.org/3/movie/${id}?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-BR`);
+		const movies = await fetch(url).then(res => res.json())
+		return movies
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+const getMoviesFavorite = (arrayIDs) => {
+	let arrayMovies = []
+	arrayIDs.map(id => {
+		arrayMovies.push(getMoviebyID(id))
+	});
+	arrayMovies = Promise.all(arrayMovies).then(favoriteMovies => favoriteMovies)
+	arrayMovies.then(favoriteMovies => addMoviesInContainer(favoriteMovies))
+}
+
+const checkingFavoriteMovies = () => {
+	const alertText = "Ops! Infelizmente você ainda não favoritou nenhum filme, para usar essa funcionalidade, pesquise seus filmes preferidos e clique em favoritar e tente novamente!";
+	let arrayIDs = localStorage.getItem("idMovie");
+	arrayIDs = JSON.parse(arrayIDs);
+
+	arrayIDs.length > 0 ? getMoviesFavorite(arrayIDs) : alert(alertText);
+}
+
+switchMovieBetweenFavoriteAndDefault.addEventListener("change", () => {
+	isInputCheck = !isInputCheck;
+	if (isInputCheck) {
+		return checkingFavoriteMovies();
+	}
+	return getMovies(currentResearch);
+});
 
 getMovies(currentResearch);
 
