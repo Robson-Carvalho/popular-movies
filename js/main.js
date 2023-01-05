@@ -1,5 +1,6 @@
 const movieContainer = document.querySelector("#movie-container");
 let search = document.querySelector("#movie-name");
+let currentResearch = search.value || "default";
 
 const isFavorite = (id) => {
 	let IDs = localStorage.getItem("idMovie");
@@ -82,20 +83,24 @@ const addMoviesInContainer = (movies) => {
 	movies.forEach(movie => renderMovies(movie));
 }
 
-const getMovies = async () => {
-	try {
-		const url = "https://api.themoviedb.org/3/movie/popular?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-br&page=1";
-		const movies = await fetch(url);
-		const response = await movies.json();
-		const data = await response.results;
-
-		addMoviesInContainer(data);
-	} catch (error) {
-		console.log(error);
+const getMovies = async (search) => {
+	if (search === "default") {
+		try {
+			const url = "https://api.themoviedb.org/3/movie/popular?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-br&page=1";
+			const movies = await fetch(url);
+			const response = await movies.json();
+			const data = await response.results;
+			currentResearch = "default";
+			return addMoviesInContainer(data);
+		} catch (error) {
+			console.log(error);
+		}
 	}
+	return getMoviesByName(search);
 }
 
 const getMoviesByName = async (movieName) => {
+	currentResearch = movieName;
 	try {
 		const url = `https://api.themoviedb.org/3/search/movie?api_key=c01784035bbc1fa42a613a52fd09e823&language=pt-BR&query=${movieName}&page=1&include_adult=false`;
 		const movies = await fetch(url)
@@ -115,15 +120,24 @@ const handleMovieSearch = () => {
 	}
 }
 
+window.addEventListener("keydown", (event) => {
+	if (event.key === "Enter") {
+		if (search !== "") {
+			handleMovieSearch();
+		}
+	}
+});
+
+
 const addMovieInLocalStorage = (id, movie) => {
 	const IDs = localStorage.getItem("idMovie");
 	if (IDs !== null) {
 		const allIDs = JSON.parse(IDs);
 		localStorage.setItem("idMovie", JSON.stringify([...allIDs, id]));
-		return getMovies();
+		return getMovies(currentResearch);
 	}
 	localStorage.setItem("idMovie", JSON.stringify([id]));
-	return getMovies();
+	return getMovies(currentResearch);
 }
 
 const movieExistsInLocalStorage = (id) => {
@@ -142,7 +156,7 @@ const removeMovieFromLocalStorage = (id) => {
 	let newIdMovies = idMovies.filter(idMovie => idMovie != id)
 
 	localStorage.setItem("idMovie", JSON.stringify([...newIdMovies]));
-	return getMovies();
+	return getMovies(currentResearch);
 }
 
 const handleToggleFavoriteMovie = async (idMovie) => {
@@ -158,13 +172,5 @@ const handleToggleFavoriteMovie = async (idMovie) => {
 	removeMovieFromLocalStorage(idMovie)
 }
 
-window.addEventListener("keydown", (event) => {
-	if (event.key === "Enter") {
-		if (search !== "") {
-			handleMovieSearch();
-		}
-	}
-});
-
-getMovies();
+getMovies(currentResearch);
 
