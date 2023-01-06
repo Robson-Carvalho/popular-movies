@@ -117,7 +117,7 @@ const getMoviesByName = async (movieName) => {
 }
 
 const handleMovieSearch = () => {
-	if (search !== "") {
+	if (search.value !== "") {
 		getMoviesByName(search.value);
 		return search.value = "";
 	}
@@ -207,7 +207,8 @@ check.addEventListener("change", () => {
 
 window.addEventListener("keydown", (event) => {
 	if (event.key === "Enter") {
-		if (search !== "") {
+		console.log(search.value)
+		if (search.value !== "") {
 			handleMovieSearch();
 		}
 	}
