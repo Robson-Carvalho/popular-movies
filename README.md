@@ -4,7 +4,7 @@
 
 <br>
 
-<a href="https://popular-movies-nine.vercel.app/" >
+<a href="https://popular-movies-nine.vercel.app/" target="_blank" >
   <img src="https://img.shields.io/static/v1?label=Production&message=Popular Movies&color=4894FF&style=for-the-badge&logo=ghost"/>
 </a>
 
