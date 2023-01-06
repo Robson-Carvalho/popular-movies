@@ -10,9 +10,11 @@
 
 <br>
 
-<h4 align="center">
-	🚧 Popular Movies em construção...  🚧
-</h4>
+<h3 align="center" style="font-weight: 600">
+	🚀 Popular Movies está em produção...
+</h3>
+
+<br>
 
 
 <h1 align="center">
